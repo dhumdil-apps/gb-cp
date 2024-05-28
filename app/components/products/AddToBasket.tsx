@@ -14,7 +14,7 @@ const AddToBasket = () => {
             className="btn btn-square btn-secondary absolute bottom-0 left-0 rounded-none hover:btn-primary"
             aria-label="Add to basket"
         >
-            <svg width="32" height="32">
+            <svg className="text-white" width="32" height="32">
                 <use href="#basket" />
             </svg>
         </button>

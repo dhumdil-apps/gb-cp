@@ -4,6 +4,7 @@ const daisyuiColors = {
     'primary': '#ff4100',
     'primary-content': '#ffffff',
     'secondary': '#858585',
+    'secondary-content': '#ececec',
 };
 
 const tailwindcssColors = {

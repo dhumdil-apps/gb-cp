@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 
+import LanguageSkeleton from '@/app/components/layout/LanguageSkeleton';
 import NavSkeleton from '@/app/components/layout/NavSkeleton';
-import HeaderPlaceholder from '@/app/components/layout/HeaderPlaceholder';
+import HeaderSkeleton from '@/app/components/layout/HeaderSkeleton';
+import FooterSkeleton from '@/app/components/layout/FooterSkeleton';
 import RegisterSvgs from '@/app/components/layout/RegisterSvgs';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export const metadata: Metadata = {
-    title: 'GymBeam',
-    description: 'GymBeam Category Page',
+    title: 'Sports Nutrition | GymBeam.com',
+    description:
+        'Sports Nutrition is a category of products that covers proteins, amino acids, weight gainers and other dietary supplements. Get good energy for every sport.',
 };
 
 export default function RootLayout({
@@ -20,17 +20,18 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" data-theme="light">
-            <body className={inter.className}>
-                <header className="h-18 fixed left-0 top-0 z-10 w-full bg-base-100 py-2 shadow">
-                    <HeaderPlaceholder />
-                </header>
+            <body>
+                <LanguageSkeleton />
+                <div className="container mx-auto max-w-screen-xl px-4">
+                    <HeaderSkeleton />
 
-                <nav className="fixed left-0 top-0 hidden h-dvh w-80 flex-col items-center justify-start pt-20 md:flex">
-                    <NavSkeleton />
-                </nav>
+                    <div className="flex gap-12">
+                        <NavSkeleton />
+                        <main>{children}</main>
+                    </div>
+                </div>
 
-                <main className="pt-20 md:pl-80">{children}</main>
-
+                <FooterSkeleton />
                 <RegisterSvgs />
             </body>
         </html>

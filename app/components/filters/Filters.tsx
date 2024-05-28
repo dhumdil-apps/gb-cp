@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import type { FiltersType } from '@/app/data/products';
 import ToggleFilters from './ToggleFilters';
 import Multiselect from './Multiselect';
@@ -52,8 +52,10 @@ const Filters = ({ filters }: FiltersProps) => {
             }
         });
 
+        setFiltering(false);
+
         // TODO: Filter products based on params (call Rest API and append params to URL)
-        console.log(searchParams.toString());
+        alert(searchParams.toString());
     };
 
     return (
@@ -62,35 +64,39 @@ const Filters = ({ filters }: FiltersProps) => {
 
             {filtering && (
                 <div className="mt-4 grid grid-cols-1 gap-4">
-                    {filters.map((filter) => (
-                        <div key={filter.code} className="grid grid-cols-2">
-                            <label className="text-sm font-bold">{filter.global_name}</label>
+                    {filters.map(
+                        (filter) =>
+                            filter.code &&
+                            filter.global_name && (
+                                <div key={filter.code} className="grid grid-cols-2">
+                                    <label className="text-sm font-bold">{filter.global_name}</label>
 
-                            {filter.type === 'multiselect' && (
-                                <Multiselect
-                                    options={filter.options ?? []}
-                                    onChange={(e) => updateFilters(filter, e)}
-                                />
-                            )}
+                                    {filter.type === 'multiselect' && (
+                                        <Multiselect
+                                            options={filter.options ?? []}
+                                            onChange={(e) => updateFilters(filter, e)}
+                                        />
+                                    )}
 
-                            {filter.type === 'checkbox' && (
-                                <Checkbox
-                                    options={filter.options ?? []}
-                                    selected={selectedFilters?.[filter.code]}
-                                    onChange={(e) => updateFilters(filter, e.target.checked)}
-                                />
-                            )}
+                                    {filter.type === 'checkbox' && (
+                                        <Checkbox
+                                            options={filter.options ?? []}
+                                            selected={selectedFilters?.[filter.code]}
+                                            onChange={(e) => updateFilters(filter, e.target.checked)}
+                                        />
+                                    )}
 
-                            {filter.type === 'range' && (
-                                <Range
-                                    min={filter.min ?? 0}
-                                    max={filter.max ?? 0}
-                                    selected={selectedFilters?.[filter.code]}
-                                    onChange={(e) => updateFilters(filter, e.target.value)}
-                                />
-                            )}
-                        </div>
-                    ))}
+                                    {filter.type === 'range' && (
+                                        <Range
+                                            min={filter.min ?? 0}
+                                            max={filter.max ?? 0}
+                                            selected={selectedFilters?.[filter.code]}
+                                            onChange={(e) => updateFilters(filter, e.target.value)}
+                                        />
+                                    )}
+                                </div>
+                            ),
+                    )}
                 </div>
             )}
         </div>

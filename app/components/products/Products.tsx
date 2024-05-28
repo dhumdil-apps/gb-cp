@@ -11,7 +11,7 @@ const Products = ({ items }: ProductsProps) => (
         {items?.map((item) => (
             <a href={item.product_url} key={item.id} className="group card">
                 <div className="relative">
-                    <img src={item.image} alt={item.name} className="h-48 w-full object-contain" />
+                    <img src={item.image} alt={item.name} className="h-48 w-full object-contain" loading="lazy" />
                     <AddToBasket />
                 </div>
                 <div className="flex h-full flex-col gap-2 py-4">
